@@ -134,6 +134,9 @@ async def fetch_company_data(url, proxies):
             except:
                 Followers = "N/A"
 
+            if "}" in Followers:
+                Followers = Followers.replace("}", "")
+
             return {
                 "url": url,
                 "company_id": companyId,

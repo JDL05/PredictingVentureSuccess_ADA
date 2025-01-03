@@ -60,7 +60,7 @@ def get_random_proxy(proxies):
 # Build proxy string for noble_tls
 def get_proxy_headers(proxy):
     proxy_url = f"http://{proxy['user']}:{proxy['password']}@{proxy['ip']}:{proxy['port']}"
-    return {"http_proxy": proxy_url, "https_proxy": proxy_url}
+    return proxy_url
 
 
 # Fetch LinkedIn company data

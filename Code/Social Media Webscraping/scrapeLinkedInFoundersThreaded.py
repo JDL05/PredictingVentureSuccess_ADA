@@ -15,6 +15,19 @@ CSV_OUTPUT_FILE = "Results/LinkedIn/Founders/founders_linkedin.csv"  # Output CS
 MAX_CONCURRENT_TASKS = 1  # Number of concurrent tasks
 SAVE_INTERVAL = 10  # Save results every 10 seconds
 
+# check already processed urls
+alreadyDone = []
+with open(CSV_OUTPUT_FILE, "r") as csvfile:
+    reader = csv.reader(csvfile)
+    for row in reader:
+        # print(row[0])
+        if row[0] != "":
+            if "http" not in row[0]:
+                continue
+            alreadyDone.append(row[0])
+
+print(len(alreadyDone))
+
 HEADERS = {
     "sec-ch-ua-platform": "\"macOS\"",
     "x-li-track": "{\"clientVersion\":\"1.13.28248.2\",\"mpVersion\":\"1.13.28248.2\",\"osName\":\"web\",\"timezoneOffset\":1,\"timezone\":\"Europe/Berlin\",\"deviceFormFactor\":\"DESKTOP\",\"mpName\":\"voyager-web\",\"displayDensity\":1,\"displayWidth\":2560,\"displayHeight\":1440}",
@@ -70,6 +83,7 @@ def get_proxy_headers(proxy):
 
 # Fetch LinkedIn company data
 async def fetch_company_data(url, proxies):
+    #url = "https://www.linkedin.com/in/mituca/"
     proxy = get_random_proxy(proxies)
     for attempt in range(2):
         try:
@@ -87,7 +101,7 @@ async def fetch_company_data(url, proxies):
             getUrl = "https://www.linkedin.com/voyager/api/graphql?includeWebMetadata=true&variables=(vanityName:"+username+")&queryId=voyagerIdentityDashProfiles.006f9921d016ba6bbed83dcb9e8bcab8"
             response = await session.get(getUrl, headers=HEADERS, proxy=get_proxy_headers(proxy))
 
-            #print(response.status_code, response.text)
+            #print("1", response.status_code, response.text)
             if response.status_code != 200:
                 raise Exception(f"HTTP {response.status_code}")
 
@@ -100,6 +114,10 @@ async def fetch_company_data(url, proxies):
 
             profileId = response.text.split('"*elements":["')[1].split('"],')[0]
 
+            try:
+                headline = response.text.split(profileId+'","companyNameOnProfileTopCardShown"')[1].split(',"headline":"')[1].split('","')[0]
+            except:
+                headline = ""
             try:
                 connections = response.text.split('"connections":{"paging"')[1].split('"total":')[1].split(",")[0]
             except:
@@ -118,7 +136,8 @@ async def fetch_company_data(url, proxies):
                 "username": username,
                 "followers": Followers,
                 "connections": connections,
-                "profileId": profileId
+                "profileId": profileId,
+                "headline": headline
             }
         except Exception as e:
             print(f"Proxy {proxy['ip']} failed for {url}: {e}")
@@ -126,6 +145,195 @@ async def fetch_company_data(url, proxies):
             time.sleep(2)
     print(f"Failed to fetch data for {url} after rotating proxies.")
     return {"url": url, "error": "Failed after proxy rotation"}
+
+
+def has_multiple_entries(entity_component):
+    """
+    Checks if a job entry has multiple sub-entries (sub-roles).
+
+    Args:
+        entity_component (dict): The entity component of a job.
+
+    Returns:
+        bool: True if multiple entries exist, False otherwise.
+    """
+    if not entity_component or not isinstance(entity_component, dict):
+        return False
+
+    try:
+        # Access subComponents
+        sub_components = entity_component.get("subComponents", {}).get("components", [])
+        if not isinstance(sub_components, list) or len(sub_components) <= 1:
+            return False
+
+        FoundFirstTitle = False
+        FoundSecondTitle = False
+        # Check if subComponents have meaningful job-related data
+        for sub_component in sub_components:
+            title = sub_component.get("components", {}).get("entityComponent", {}).get("titleV2", {}).get("text", {}).get(
+                "text", "")
+            if title and FoundFirstTitle:
+                FoundSecondTitle = True
+                return True
+            FoundFirstTitle = True
+            fixed_list_component = sub_component.get("components", {}).get("fixedListComponent", {})
+            if fixed_list_component:
+                #print(fixed_list_component)
+                # Validate the fixedListComponent contains entityComponents
+                components = fixed_list_component.get("components", [])
+                for component in components:
+                    entity = component.get("components", {}).get("entityComponent", {})
+                    if entity and isinstance(entity, dict):
+                        return True  # Valid multiple entries found
+    except Exception as e:
+        #print("Error checking for multiple entries:", e)
+        pass
+
+    return False
+def parse_linkedin_jobs(data):
+    jobs = []
+    try:
+        # Traverse the JSON to find job-related components
+        included_items = data.get("included", [])
+        #print(included_items)
+        for item in included_items:
+            top_components = item.get("topComponents", [])
+            if "Berufserfahrung" not in str(top_components):
+                #print("No Berufserfahrung found.")
+                continue
+            for top_component in top_components:
+
+                # Loop through components to find the first valid fixedListComponent
+                components = top_component.get("components", {}).values()
+                for component in components:
+                    if component == None:
+                        continue
+                    # Loop through components to find the first valid fixedListComponent
+                    fixed_list = None
+                    #print(component)
+                    #for sub_component in component.get("components", {}).values():
+                    #    if isinstance(sub_component, dict) and sub_component.get(
+                    #            "$type") == "com.linkedin.voyager.dash.identity.profile.tetris.FixedListComponent":
+                    #        fixed_list = sub_component
+                    #        break  # Found the valid component, no need to continue
+
+                    # Skip if no valid fixedListComponent is found
+                    #if not fixed_list:
+                    #    continue
+
+                    # Process job components inside fixedListComponent
+                    job_components = component.get("components", [])
+                    for job in job_components:
+                        # Extract job details
+                        #print(job)
+                        entity_component = job.get("components", {}).get("entityComponent", {})
+                        multipleEntries = False
+                        #print(entity_component["subComponents"])
+                        if has_multiple_entries(entity_component):
+                            #print("Job with multiple entries detected")
+                            # Handle logic for multiple entries
+                       # if """'entityComponent': {'isNullState': False""" in str(job):
+                            multipleEntries = True
+                        #print("test", multipleEntries)
+                        #print(job)
+                        try:
+                            if multipleEntries:
+                                # multiple entries
+                                for entry in entity_component["subComponents"]["components"]:
+                                    #print(entry)
+                                    #if entry.get("components", {}).get("entityComponent", {}) is None:
+                                        # normal job again
+                                    title = entry.get("components", {}).get("entityComponent", {}).get("titleV2", {}).get("text", {}).get("text", "")
+                                    company = entity_component.get("titleV2", {}).get("text", {}).get("text", "")
+                                    try:
+                                        duration = entry.get("components", {}).get("entityComponent", {}).get("caption",
+                                                                                                              {}).get(
+                                            "text", "")
+                                    except:
+                                        duration = ""
+                                    try:
+                                        location = entry.get("components", {}).get("entityComponent", {}).get("metadata", {}).get("text", "")
+                                    except:
+                                        location = ""
+                                    #print(location)
+                                    #print(title, company, duration)
+                                    # Extract job description if available
+                                    #sub_components = job.get("components", {}).get("subComponents", {}).get("components", [])
+                                    description = ""
+                                    # Extract sub-components for description
+                                    try:
+                                        sub_components = entry.get("components", {}).get("entityComponent", {}).get("subComponents", {}).get("components", [])
+                                        for sub_component in sub_components:
+                                            fixed_list_component = sub_component.get("components", {}).get("fixedListComponent", {})
+                                            if not fixed_list_component:
+                                                continue
+
+                                            # Navigate to textComponent for the description
+                                            description_components = fixed_list_component.get("components", [])
+                                            for desc_component in description_components:
+                                                text_component = desc_component.get("components", {}).get("textComponent", {})
+                                                description = text_component.get("text", {}).get("text", "")
+                                    except Exception as e:
+                                        #print("description exception", e)
+                                        pass
+
+                                    # Add to jobs list
+                                    jobs.append({
+                                        "title": title,
+                                        "company": company,
+                                        "duration": duration,
+                                        "description": description,
+                                        "location": location
+                                    })
+                            else:
+                                #print("getting title")
+                                title = entity_component.get("titleV2", {}).get("text", {}).get("text", "")
+                                company = entity_component.get("subtitle", {}).get("text", "")
+                                try:
+                                    duration = entity_component.get("caption", {}).get("text", "")
+                                except:
+                                    duration = ""
+                                #print(title, company, duration)
+                                try:
+                                    location = entity_component.get("metadata", {}).get("text", "")
+                                except:
+                                    location = ""
+                                #print(location)
+                                # Extract job description if available
+                                #sub_components = job.get("components", {}).get("subComponents", {}).get("components", [])
+                                description = ""
+                                # Extract sub-components for description
+                                try:
+                                    sub_components = entity_component.get("subComponents", {}).get("components", [])
+                                    #print(sub_components)
+                                    for sub_component in sub_components:
+                                        fixed_list_component = sub_component.get("components", {}).get("fixedListComponent", {})
+                                        if not fixed_list_component:
+                                            continue
+
+                                        # Navigate to textComponent for the description
+                                        description_components = fixed_list_component.get("components", [])
+                                        for desc_component in description_components:
+                                            text_component = desc_component.get("components", {}).get("textComponent", {})
+                                            description = text_component.get("text", {}).get("text", "")
+                                except Exception as e:
+                                    #print("description exception", e)
+                                    pass
+
+                                # Add to jobs list
+                                jobs.append({
+                                    "title": title,
+                                    "company": company,
+                                    "duration": duration,
+                                    "description": description,
+                                    "location": location
+                                })
+                        except Exception as e:
+                            print(f"Error parsing job: {e}")
+                            continue
+    except AttributeError as e:
+        print(f"Error parsing JSON structure: {e}")
+    return jobs
 
 async def fetch_education(url, profileId, proxies):
     proxy = get_random_proxy(proxies)
@@ -141,7 +349,7 @@ async def fetch_education(url, profileId, proxies):
             getUrl = "https://www.linkedin.com/voyager/api/graphql?includeWebMetadata=true&variables=(profileUrn:"+profileId.replace(":", "%3A")+")&queryId=voyagerIdentityDashProfileCards.d34fc34cd086009bd15b6768ac1a100e"
             response = await session.get(getUrl, headers=HEADERS, proxy=get_proxy_headers(proxy))
             #print(getUrl)
-            #print(response.status_code, response.text)
+            #print("2", response.status_code, response.text)
             if response.status_code != 200:
                 raise Exception(f"HTTP {response.status_code}")
 
@@ -150,11 +358,22 @@ async def fetch_education(url, profileId, proxies):
 
             print(f"2. Request successful for {url} with proxy {proxy['ip']}")
 
+            jsondata = response.json()
+            #print(jsondata)
+            parsed_jobs = parse_linkedin_jobs(jsondata)
+
+            # Print results
+            #for job in parsed_jobs:
+                #print(f"Title: {job['title']}, Company: {job['company']}, Duration: {job['duration']}")
+                #print(f"Description: {job['description']}\n")
+
             # Extract data
             degree1 = ""
             degree2 = ""
             degree1_university = ""
             degree2_university = ""
+            degree1_duration = ""
+            degree2_duration = ""
             try:
                 #raw = response.text.split('"text":"Ausbildung"')[1].split('"fixedListComponent":{')[1]
                 raw = response.text.split('"text":"Ausbildung"')[1].split('"profileContentCollectionsComponent":null')[1]
@@ -164,6 +383,12 @@ async def fetch_education(url, profileId, proxies):
                     #print(i)
                     if "titleV2" not in i:
                         continue
+                    try:
+                        # get title of education (usually university name)
+                        duration = i.split("caption")[1].split('"text":"')[1].split('"')[0]
+                    except Exception as e:
+                        #print("uni", e)
+                        duration = ""
                     try:
                         # get title of education (usually university name)
                         university = i.split("titleV2")[1].split('"text":"')[1].split('"')[0]
@@ -187,20 +412,32 @@ async def fetch_education(url, profileId, proxies):
                         degree1_university = university
                     elif degree2_university == "":
                         degree2_university = university
+                    if degree1_duration == "":
+                        degree1_duration = duration
+                    elif degree2_duration == "":
+                        degree2_duration = duration
             except:
                 print("Failed parsing degrees. Assuming no degrees.")
-                return {
-                    "degree_1": "",
-                    "degree_1_university": "",
-                    "degree_2": "",
-                    "degree_2_university": "",
-                }
-            return {
+
+            result =  {
                 "degree_1": degree1,
                 "degree_1_university": degree1_university,
+                "degree_1_duration":degree1_duration,
                 "degree_2": degree2,
                 "degree_2_university": degree2_university,
+                "degree_2_duration": degree2_duration,
             }
+            # Add up to 5 jobs to the result
+            for i, job in enumerate(parsed_jobs[:10]):
+                result[f"job_title_{i+1}"] = job["title"]
+                result[f"job_company_{i+1}"] = job["company"]
+                result[f"job_duration_{i+1}"] = job["duration"]
+                result[f"job_location_{i+1}"] = job["location"]
+                result[f"job_description_{i+1}"] = job["description"]
+
+            print(result)
+
+            return result
         except Exception as e:
             print(f"Proxy {proxy['ip']} failed for {url}: {e}")
             proxy = get_random_proxy(proxies)
@@ -231,15 +468,26 @@ async def process_urls(urls, proxies):
                     if education["degree_1_university"] != "":
                         result["degree_1"] = education["degree_1"]
                         result["degree_1_university"] = education["degree_1_university"]
+                        result["degree_1_duration"] = education["degree_1_duration"]
                         result["degree_2"] = education["degree_2"]
                         result["degree_2_university"] = education["degree_2_university"]
+                        result["degree_2_duration"] = education["degree_2_duration"]
+                    try:
+                        for i in range(1, 11):
+                            result[f"job_title_{i}"] = education[f"job_title_{i}"]
+                            result[f"job_company_{i}"] = education[f"job_company_{i}"]
+                            result[f"job_duration_{i}"] = education[f"job_duration_{i}"]
+                            result[f"job_location_{i}"] = education[f"job_location_{i}"]
+                            result[f"job_description_{i}"] = education[f"job_description_{i}"]
+                    except:
+                        pass
                 del result["profileId"]
             except:
                 pass
             print(result)
             with results_lock:
                 results.append(result)
-            time.sleep(1)
+            time.sleep(0.3)
 
     tasks = [fetch_with_semaphore(url) for url in urls]
     await asyncio.gather(*tasks)
@@ -247,18 +495,51 @@ async def process_urls(urls, proxies):
 
 # Write results to CSV
 def write_results_to_csv(results, file_path):
-    with open(file_path, "w", newline="") as csvfile:
-        fieldnames = ["url", "username", "followers", "connections", "degree_1", "degree_1_university", "degree_2", "degree_2_university", "error"]
+    with open(file_path, "a", newline="") as csvfile:
+        fieldnames = ["url", "username", "followers", "connections", "headline", "degree_1", "degree_1_university", "degree_1_duration", "degree_2", "degree_2_university", "degree_2_duration",  "job_title_1", "job_company_1", "job_duration_1", "job_location_1", "job_description_1",
+                      "job_title_2", "job_company_2", "job_duration_2", "job_location_2", "job_description_2",
+                        "job_title_3", "job_company_3", "job_duration_3", "job_location_3", "job_description_3",
+                        "job_title_4", "job_company_4", "job_duration_4", "job_location_4", "job_description_4",
+                        "job_title_5", "job_company_5", "job_duration_5", "job_location_5", "job_description_5",
+                        "job_title_6", "job_company_6", "job_duration_6", "job_location_6", "job_description_6",
+                        "job_title_7", "job_company_7", "job_duration_7", "job_location_7", "job_description_7",
+                        "job_title_8", "job_company_8", "job_duration_8", "job_location_8", "job_description_8",
+                        "job_title_9", "job_company_9", "job_duration_9", "job_location_9", "job_description_9",
+                        "job_title_10", "job_company_10", "job_duration_10", "job_location_10", "job_description_10",
+                        "error"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
+        #writer.writeheader()
         for result in results:
-            writer.writerow(result)
-
+            if result["url"] not in alreadyDone:  # Check for duplicates
+                writer.writerow(result)
+                alreadyDone.append(result["url"])  # Mark as written
 
 # Main function
 async def main():
     print("Loading proxies...")
     proxies = load_proxies(PROXY_FILE)
+
+
+    # Read the CSV and remove duplicates
+    unique_rows = []
+    seen = set()
+
+    with open(CSV_OUTPUT_FILE, "r") as infile:
+        reader = csv.reader(infile)
+        for row in reader:
+            # Convert the row to a tuple (because lists are not hashable) and check for duplicates
+            row_tuple = tuple(row)
+            if row_tuple not in seen:
+                seen.add(row_tuple)
+                unique_rows.append(row)
+
+    # Write the unique rows back to a new CSV file
+    with open(CSV_OUTPUT_FILE, "w", newline="") as outfile:
+        writer = csv.writer(outfile)
+        writer.writerows(unique_rows)
+
+    print(f"Removed duplicates. Unique rows written to {CSV_OUTPUT_FILE}.")
+
 
     print("Reading LinkedIn URLs...")
     urls = []
@@ -268,8 +549,11 @@ async def main():
             if row[6] != "":
                 if "http" not in row[6]:
                     continue
+                if row[6] in alreadyDone:
+                    continue
                 url = row[6]
                 urls.append(url)
+
 
     print(f"Processing {len(urls)} URLs with {len(proxies)} proxies...")
     save_task = asyncio.create_task(periodic_save(CSV_OUTPUT_FILE))

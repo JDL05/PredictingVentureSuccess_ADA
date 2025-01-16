@@ -10,14 +10,13 @@ import pickle
 from tabpfn import TabPFNClassifier
 
 # load data.csv
-data = pd.read_csv('../../Datasets/Aggregated Sets/data.csv')
+data = pd.read_csv('../../Datasets/Saved Sets/data.csv')
 # Splitting data into features and target
 X = data.drop(columns=['Success'])
 y = data['Success']
 
 # Train-Test Split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
-
 # Apply SMOTE on the training data, because of the imbalanced target variable (see above)
 smote = SMOTE(random_state=42)
 X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
@@ -71,4 +70,4 @@ def load():
     plt.title(f"Confusion Matrix (Percentage): {name}")
     plt.show()
 
-load()
+run_model()

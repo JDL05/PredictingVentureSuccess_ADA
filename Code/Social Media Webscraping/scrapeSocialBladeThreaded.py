@@ -126,11 +126,6 @@ async def fetch_socialblade_data(url, proxies):
             if followers_match:
                 followers_data_string = followers_match.group(1)
                 followers_stats = process_data_array(followers_data_string)
-                #if followers_stats:
-                    #print(
-                     #   f"[FOLLOWERS] Maximum Growth in a Month: {followers_stats['max_growth_value']} followers in {followers_stats['max_growth_month']}")
-                    #print(
-                     #   f"[FOLLOWERS] Maximum Loss in a Month: {followers_stats['max_loss_value']} followers in {followers_stats['max_loss_month']}")
             else:
                 followers_stats = {}
                 followers_stats["max_growth_value"] = ""
@@ -145,11 +140,6 @@ async def fetch_socialblade_data(url, proxies):
             if tweets_match:
                 tweets_data_string = tweets_match.group(1)
                 tweets_stats = process_data_array(tweets_data_string)
-                #if tweets_stats:
-                    #print(
-                     #   f"[TWEETS] Maximum Growth in a Month: {tweets_stats['max_growth_value']} tweets in {tweets_stats['max_growth_month']}")
-                    #print(
-                     #   f"[TWEETS] Maximum Loss in a Month: {tweets_stats['max_loss_value']} tweets in {tweets_stats['max_loss_month']}")
             else:
                 print("Tweet data array not found in script.")
                 tweets_stats = {}

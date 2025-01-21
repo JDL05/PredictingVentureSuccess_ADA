@@ -22,7 +22,7 @@
 
 ## 📚 About the Project
 
-The goal of this project is to predict the success of startups in the core startup ecosystems of Germany. Therefore, we collected data from the startup database [Crunchbase] (https://www.crunchbase.com) and scraped social media data from LinkedIn and X/Twitter. To achieve the project goal, we applied a machine learning pipeline and selected a set of models to predict the binary success variable. We selected from classical methods (Logistic Regression / Gradient Boosting / Light GBM / Neural Network), new emerging models like Tabular Prior-data Fitted Network (TabPFN) and Large Language Models (distilBERT). The project results are explained in a research paper and presented in a React-coded dashboard.
+The goal of this project is to predict the success of startups in the core startup ecosystems of Germany. Therefore, we collected data from the startup database [Crunchbase](https://www.crunchbase.com) and scraped social media data from LinkedIn and X/Twitter. To achieve the project goal, we applied a machine learning pipeline and selected a set of models to predict the binary success variable. We selected from classical methods (Logistic Regression / Gradient Boosting / Light GBM / Neural Network), new emerging models like Tabular Prior-data Fitted Network (TabPFN) and Large Language Models (distilBERT). The project results are explained in a research paper and presented in a React-coded dashboard.
 
 ---
 

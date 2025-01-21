@@ -1,6 +1,6 @@
 # 🚀 Predicting Venture Success
 
-✨ **Brief description:** We use Cruchbase and Social Media data to predict the success of startups with classical Machine Learning models, a new foundation model called TabPFN and Large Language Models.
+✨ **Brief description:** We use Cruchbase and social media data to predict startup success using classical machine learning models, a new foundation model called TabPFN, and large language models.
 
 ![Status Badge](https://img.shields.io/badge/status-active-green.svg)  
 ![Python](https://img.shields.io/badge/python-3.12-blue)
@@ -22,7 +22,7 @@
 
 ## 📚 About the Project
 
-The objective of this project is to predict the success of startups in the core startup ecosystems of Germany. Therefore, we collected data from the startup-database [Crunchbase](https://www.crunchbase.com) and scraped social media data from LinkedIn and X/Twitter. To reach the projects objective, we applied a Machine Learning Pipeline and selected a row of models to predict the binary success variable. We selected from classical methods (Logistic Regression / Gradient Boosting / Light GBM / Neural Network), new emerging models like the Tabular Prior-data Fitted Network (TabPFN) and Large Language Models (distilBERT). The projects results are explained in a research paper and presented in a React-coded Dashboard.
+The goal of this project is to predict the success of startups in the core startup ecosystems of Germany. Therefore, we collected data from the startup database [Crunchbase] (https://www.crunchbase.com) and scraped social media data from LinkedIn and X/Twitter. To achieve the project goal, we applied a machine learning pipeline and selected a set of models to predict the binary success variable. We selected from classical methods (Logistic Regression / Gradient Boosting / Light GBM / Neural Network), new emerging models like Tabular Prior-data Fitted Network (TabPFN) and Large Language Models (distilBERT). The project results are explained in a research paper and presented in a React-coded dashboard.
 
 ---
 
@@ -62,7 +62,7 @@ The objective of this project is to predict the success of startups in the core 
 
 ## 🔢 Data Files
 
-All data files needed to process the code are stored in the 'Datasets'-Directory or 'Code'-Directory when the data is a result of a webscraping script. To use them, the entire directories have to be downloaded. In the code, every files are read with the use of a wildcard in the filepaths (/*.csv). 
+All data files needed to process the code are stored in the 'Datasets' directory, or in the 'Code' directory if the data is the result of a web scraping script. To use them, the entire directories must be downloaded. In the code, each file is read using a placeholder in the file paths (/*.csv). 
 
 **The following data sets / directories are needed to run 'Pre-Processing/DataPreprocessing_Pipeline.ipynb'**
 
@@ -104,10 +104,10 @@ On Github:
 ## 📎 Deliverables
 
 [Research Paper](LINK)
-The results are explained in a research-type paper where the related work, methodology and experiment application is explained. This paper provides the most detailed information.
+The results are explained in a research-type paper that describes the related work, methodology, and application of the experiment. This paper provides the most detailed information.
 
 [Dashboard](LINK)
-The Dashboard is coded with React and is [online](Link) accessible. Nevertheless, the source code is provided and can be run locally. 
+The dashboard is coded in React and is [online](link) accessible. However, the source code is provided and can be run locally. 
 
 ---
 

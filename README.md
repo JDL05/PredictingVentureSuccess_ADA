@@ -1,8 +1,10 @@
 # 🚀 Predicting Venture Success
 
-✨ **Brief description:** A concise explanation of the project’s purpose and functionality. Mention key highlights in 1-2 sentences.
+✨ **Brief description:** We use Cruchbase and Social Media data to predict the success of startups with classical Machine Learning models, a new foundation model called TabPFN and Large Language Models.
 
 ![Status Badge](https://img.shields.io/badge/status-active-green.svg)  
+![Python](https://img.shields.io/badge/python-3.9-blue)
+![React](https://img.shields.io/badge/react-17.0.2-blue)
 
 ---
 
@@ -13,9 +15,8 @@
 3. [🔢 Data Files](#datafiles)
 4. [🐍 Coding Files](#codingfiles)
 5. [🧠 Models](#models)
-6. [💻 Dashboard](#usage)
-7. [📎 Presentation & Paper](#presentationandpaper)
-8. [🧑 Team](#team)
+6. [📎 Delivarables](#presentationandpaper)
+7. [🧑 Team](#team)
 
 ---
 
@@ -25,49 +26,30 @@ The objective of this project is to predict the success of startups in the core 
 
 ---
 
-## ⚙️ Features
+## 💬 Languages
 
-- ✅ **Feature 1:** Short description  
-- ✅ **Feature 2:** Short description  
-- 🔜 **Feature 3 (Planned):** Short description  
+
 
 ---
 
-## 🔧 Installation
+## 🔢 Data Files
 
-### 📋 Prerequisites
-
-- 🖥️ OS: Windows / Linux / macOS
-- 📦 Required Software: Node.js / Python / etc.
-
-### 🛠️ Steps
-
-1. Clone the repository:  
-    ```bash
-    git clone https://github.com/username/projectname.git
-    cd projectname
-    ```
-2. Install dependencies:  
-    ```bash
-    npm install
-    ```
-3. Configure environment variables (e.g., `.env` file):  
-    ```bash
-    cp .env.example .env
-    ```
-4. Start the project:  
-    ```bash
-    npm start
-    ```
 
 ---
 
-## 💻 Usage
+## 🐍 Coding Files
 
-Show examples of how the project can be used, including code snippets and screenshots.  
 
-```javascript
-// Example usage
-function exampleFeature() {
-  console.log("🚀 Project is running!");
-}
+---
+
+## 🧠 Models
+
+
+--
+
+## 📎 Deliverables
+
+
+---
+
+## 🧑 Team

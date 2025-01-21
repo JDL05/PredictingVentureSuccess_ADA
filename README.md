@@ -63,7 +63,7 @@ For the LLM-Approach, the following files have to be run:
 
 All data files needed to process the code are stored in the 'Datasets'-Directory or 'Code'-Directory when the data is a result of a webscraping script. To use them, the entire directories have to be downloaded. In the code, every files are read with the use of a wildcard in the filepaths (/*.csv). 
 
-** The following data sets / directories are needed to run 'Pre-Processing/DataPreprocessing_Pipeline.ipynb' **
+**The following data sets / directories are needed to run 'Pre-Processing/DataPreprocessing_Pipeline.ipynb'**
 
 On Github:
 1. Datasets/Companies
@@ -75,26 +75,26 @@ On Github:
 On Google Drive:
 1. [People Data from Crunchbase](https://drive.google.com/file/d/1hDpWc7DjrCUaiS1QdBTeA14Yq5JOXwew/view?usp=share_link)
 
-** The following data set / directories are needed to run 'Feature Engineering/FeatureEngineering.ipynb' **
+**The following data set / directories are needed to run 'Feature Engineering/FeatureEngineering.ipynb'**
 
 On Github:
 1. Code/Social Media Webscraping/Results/LinkedIn/founders_linkedin.csv
 2. Datasets/Datasets/Universities/UniversityRanking.csv
 
-** The other files do not need additional data files **
+**The other files do not need additional data files**
 ---
 
 ## 🧠 Models
 
-** Prediction Models **
+**Prediction Models**
 * Logistic Regression
 * Neural Network
 * Gradient Boosting
 * Light GBM
-* TabPF (see [Github](https://github.com/PriorLabs/TabPFN)
+* TabPF (see [Github](https://github.com/PriorLabs/TabPFN))
 
-** LLMs **
-
+**LLMs**
+* [Bart Large MNLI](https://huggingface.co/facebook/bart-large-mnli)
 
 --
 

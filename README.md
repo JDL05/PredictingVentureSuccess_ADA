@@ -35,17 +35,17 @@ The goal of this project is to predict the success of startups in the core start
 
 ## 🐍 Coding Files
 
-**We applied a typical Machine Learning pipeline with the following order and file names:**
+*We applied a typical Machine Learning pipeline with the following order and file names:*
 
 * Pre-Processing: DataPreprocessing_Pipeline.ipynb
 * Feature Engineering: FeatureEngineering.ipynb
 * Model Preparation: ModelPreparation.ipynb
 * Modelling: Modelling.ipynb
 
-**For the Webscraping, the following files have to be run:**
+*For the Webscraping, the following files have to be run:*
 
 
-**For the Dashboarding, the following files have to be run:**
+*For the Dashboarding, the following files have to be run:*
 
 1. Download the 'Dashboard/Code-Files'-directory and open the folder in an IDE. We used Visual Studio Code.
 2. Run the following code in Terminal: cd + 'directory-path'
@@ -53,7 +53,7 @@ The goal of this project is to predict the success of startups in the core start
 4. Open the displayed link in a browser
 5. Optional: under 'Dashboard/Code-Files/public' a json-file is stored. This json-file maintains the data for the dashboard and is interchangable.
 
-**For the LLM-Approach, the following files have to be run:**
+*For the LLM-Approach, the following files have to be run:*
 
 
 
@@ -64,7 +64,7 @@ The goal of this project is to predict the success of startups in the core start
 
 All data files needed to process the code are stored in the 'Datasets' directory, or in the 'Code' directory if the data is the result of a web scraping script. To use them, the entire directories must be downloaded. In the code, each file is read using a placeholder in the file paths (/*.csv). 
 
-**The following data sets / directories are needed to run 'Pre-Processing/DataPreprocessing_Pipeline.ipynb'**
+*The following data sets / directories are needed to run 'Pre-Processing/DataPreprocessing_Pipeline.ipynb'*
 
 On Github:
 1. Datasets/Companies
@@ -76,26 +76,26 @@ On Github:
 On Google Drive:
 1. [People Data from Crunchbase](https://drive.google.com/file/d/1hDpWc7DjrCUaiS1QdBTeA14Yq5JOXwew/view?usp=share_link)
 
-**The following data set / directories are needed to run 'Feature Engineering/FeatureEngineering.ipynb'**
+*The following data set / directories are needed to run 'Feature Engineering/FeatureEngineering.ipynb'*
 
 On Github:
 1. Code/Social Media Webscraping/Results/LinkedIn/founders_linkedin.csv
 2. Datasets/Datasets/Universities/UniversityRanking.csv
 
-**The other files do not need additional data files**
+*The other files do not need additional data files*
 
 ---
 
 ## 🧠 Models
 
-**Prediction Models**
+*Prediction Models*
 * Logistic Regression
 * Neural Network
 * Gradient Boosting
 * Light GBM
 * TabPF (see [Github](https://github.com/PriorLabs/TabPFN))
 
-**LLMs**
+*LLMs*
 * [Bart Large MNLI](https://huggingface.co/facebook/bart-large-mnli)
 * [distilBERT](https://huggingface.co/docs/transformers/model_doc/distilbert)
 

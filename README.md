@@ -82,6 +82,7 @@ On Github:
 2. Datasets/Datasets/Universities/UniversityRanking.csv
 
 **The other files do not need additional data files**
+
 ---
 
 ## 🧠 Models
@@ -97,7 +98,7 @@ On Github:
 * [Bart Large MNLI](https://huggingface.co/facebook/bart-large-mnli)
 * [distilBERT](https://huggingface.co/docs/transformers/model_doc/distilbert)
 
---
+---
 
 ## 📎 Deliverables
 

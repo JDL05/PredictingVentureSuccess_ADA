@@ -104,10 +104,10 @@ On Github:
 
 ## 📎 Deliverables
 
-[Research Paper](LINK)
+[Research Paper](LINK) <br>
 The results are explained in a research-type paper that describes the related work, methodology, and application of the experiment. This paper provides the most detailed information.
 
-[Dashboard](LINK)
+[Dashboard](LINK) <br>
 The dashboard is coded in React and is [online](link) accessible. However, the source code is provided and can be run locally. 
 
 ---

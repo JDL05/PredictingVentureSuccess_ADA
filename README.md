@@ -1,35 +1,27 @@
-# 🚀 Project Name
+# 🚀 Predicting Venture Success
 
 ✨ **Brief description:** A concise explanation of the project’s purpose and functionality. Mention key highlights in 1-2 sentences.
 
 ![Status Badge](https://img.shields.io/badge/status-active-green.svg)  
-![License Badge](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ---
 
 ## 📖 Table of Contents
 
 1. [📚 About the Project](#about-the-project)
-2. [⚙️ Features](#features)
-3. [🔧 Installation](#installation)
-4. [💻 Usage](#usage)
-5. [🤝 Contributing](#contributing)
-6. [📍 Roadmap](#roadmap)
-7. [📜 License](#license)
-8. [📞 Contact](#contact)
-9. [💡 Acknowledgments](#acknowledgments)
+2. [💬 Languages](#languages)
+3. [🔢 Data Files](#datafiles)
+4. [🐍 Coding Files](#codingfiles)
+5. [🧠 Models](#models)
+6. [💻 Dashboard](#usage)
+7. [📎 Presentation & Paper](#presentationandpaper)
+8. [🧑 Team](#team)
 
 ---
 
 ## 📚 About the Project
 
-📝 A detailed explanation of the problem this project solves, its goals, and why it exists. Include visuals or screenshots to make it more compelling.
-
-### 🛠️ Built With
-
-- **Programming Language(s):** 🐍 Python / ☕ JavaScript / etc.
-- **Framework(s):** ⚛️ React / 🐘 Flask / etc.
-- **Database(s):** 🐬 MySQL / 🐘 PostgreSQL / etc.
+The objective of this project is to predict the success of startups in the core startup ecosystems of Germany. Therefore, we collected data from the startup-database [Crunchbase](https://www.crunchbase.com) and scraped social media data from LinkedIn and X/Twitter. To reach the projects objective, we applied a Machine Learning Pipeline and selected a row of models to predict the binary success variable. We selected from classical methods (Logistic Regression / Gradient Boosting / Light GBM / Neural Network), new emerging models like the Tabular Prior-data Fitted Network (TabPFN) and Large Language Models (distilBERT). The projects results are explained in a research paper and presented in a React-coded Dashboard.
 
 ---
 

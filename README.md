@@ -61,8 +61,8 @@ The goal of this project is to predict the success of startups in the core start
    
 ### For the LLM-Approach, the following files have to be run:
 
-
-
+1. Download the presaved 'companies.csv' file from 'Datasets/Saved Sets' or use the resulting dataset after running the Preprocessing and FeatureEngineering code
+2. From 'Code/LLM-Approach' run 'GridSearch_distilBERT' (Note: we have truncated the search for Hyperparameters, so you can run the file without running into computing constraints)
 
 ---
 

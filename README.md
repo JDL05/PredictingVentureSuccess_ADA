@@ -35,24 +35,25 @@ The objective of this project is to predict the success of startups in the core 
 
 ## 🐍 Coding Files
 
-We applied a typical Machine Learning pipeline with the following order and file names:
+**We applied a typical Machine Learning pipeline with the following order and file names:**
 
 * Pre-Processing: DataPreprocessing_Pipeline.ipynb
 * Feature Engineering: FeatureEngineering.ipynb
 * Model Preparation: ModelPreparation.ipynb
 * Modelling: Modelling.ipynb
 
-For the Webscraping, the following files have to be run:
+**For the Webscraping, the following files have to be run:**
 
 
-For the Dashboarding, the following files have to be run:
+**For the Dashboarding, the following files have to be run:**
+
 1. Download the 'Dashboard/Code-Files'-directory and open the folder in an IDE. We used Visual Studio Code.
 2. Run the following code in Terminal: cd + 'directory-path'
 3. Run in the Terminal: npm run dev
 4. Open the displayed link in a browser
 5. Optional: under 'Dashboard/Code-Files/public' a json-file is stored. This json-file maintains the data for the dashboard and is interchangable.
 
-For the LLM-Approach, the following files have to be run:
+**For the LLM-Approach, the following files have to be run:**
 
 
 

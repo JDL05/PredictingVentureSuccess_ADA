@@ -12,10 +12,10 @@
 
 1. [📚 About the Project](#about-the-project)
 2. [💬 Languages](#languages)
-3. [🔢 Data Files](#datafiles)
-4. [🐍 Coding Files](#codingfiles)
+3. [🔢 Data Files](#data-files)
+4. [🐍 Coding Files](#coding-files)
 5. [🧠 Models](#models)
-6. [📎 Delivarables](#presentationandpaper)
+6. [📎 Delivarables](#delivarables)
 7. [🧑 Team](#team)
 
 ---

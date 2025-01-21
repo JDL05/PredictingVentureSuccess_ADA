@@ -95,12 +95,23 @@ On Github:
 
 **LLMs**
 * [Bart Large MNLI](https://huggingface.co/facebook/bart-large-mnli)
+* [distilBERT](https://huggingface.co/docs/transformers/model_doc/distilbert)
 
 --
 
 ## 📎 Deliverables
 
+[Research Paper](LINK)
+The results are explained in a research-type paper where the related work, methodology and experiment application is explained. This paper provides the most detailed information.
+
+[Dashboard](LINK)
+The Dashboard is coded with React and is [online](Link) accessible. Nevertheless, the source code is provided and can be run locally. 
 
 ---
 
 ## 🧑 Team
+* Christopher Goebeler
+* Leon Kvas
+* Jan Linzner
+* Simon Merten
+

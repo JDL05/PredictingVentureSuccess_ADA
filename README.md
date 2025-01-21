@@ -33,16 +33,44 @@ The objective of this project is to predict the success of startups in the core 
 
 ---
 
+## 🐍 Coding Files
+
+We applied a typical Machine Learning pipeline with the following order and file names:
+
+* Pre-Processing: DataPreprocessing_Pipeline.ipynb
+* Feature Engineering: FeatureEngineering.ipynb
+* Model Preparation: ModelPreparation.ipynb
+* Modelling: Modelling.ipynb
+
+For the Webscraping, the following files have to be run:
+
+
+For the Dashboarding, the following files have to be run:
+1. Download the 'Dashboard/Code-Files'-directory and open the folder in an IDE. We used Visual Studio Code.
+2. Run the following code in Terminal: cd + 'directory-path'
+3. Run in the Terminal: npm run dev
+4. Open the displayed link in a browser
+5. Optional: under 'Dashboard/Code-Files/public' a json-file is stored. This json-file maintains the data for the dashboard and is interchangable.
+
+For the LLM-Approach, the following files have to be run:
+
+
+
+
+---
+
 ## 🔢 Data Files
 
-All data files needed to process the code are stored in the 'Datasets'-Directory. To use them, the entire directories have to be downloaded. In the code, every files are read with the use of a wildcard in the filepaths (/*.csv). 
+All data files needed to process the code are stored in the 'Datasets'-Directory or 'Code'-Directory when the data is a result of a webscraping script. To use them, the entire directories have to be downloaded. In the code, every files are read with the use of a wildcard in the filepaths (/*.csv). 
 
 ** The following data sets / directories are needed to run 'Pre-Processing/DataPreprocessing_Pipeline.ipynb' **
 
 On Github:
-1. 'Companies' 
-2. 'Funding'
-3. 'Investors'
+1. Datasets/Companies
+2. Datasets/Funding
+3. Datasets/Investors
+4. Code/Social Media Webscraping/Results/LinkedIn/Companies
+5. Code/Social Media Webscraping/Results/Twitter/companies_twitter.csv
 
 On Google Drive:
 1. [People Data from Crunchbase](https://drive.google.com/file/d/1hDpWc7DjrCUaiS1QdBTeA14Yq5JOXwew/view?usp=share_link)
@@ -50,17 +78,22 @@ On Google Drive:
 ** The following data set / directories are needed to run 'Feature Engineering/FeatureEngineering.ipynb' **
 
 On Github:
+1. Code/Social Media Webscraping/Results/LinkedIn/founders_linkedin.csv
+2. Datasets/Datasets/Universities/UniversityRanking.csv
 
-
-
----
-
-## 🐍 Coding Files
-
-
+** The other files do not need additional data files **
 ---
 
 ## 🧠 Models
+
+** Prediction Models **
+* Logistic Regression
+* Neural Network
+* Gradient Boosting
+* Light GBM
+* TabPF (see [Github](https://github.com/PriorLabs/TabPFN)
+
+** LLMs **
 
 
 --

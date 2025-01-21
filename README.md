@@ -37,12 +37,19 @@ The objective of this project is to predict the success of startups in the core 
 
 All data files needed to process the code are stored in the 'Datasets'-Directory. To use them, the entire directories have to be downloaded. In the code, every files are read with the use of a wildcard in the filepaths (/*.csv). 
 
-The following data sets / directories are needed to run the code:
+** The following data sets / directories are needed to run 'Pre-Processing/DataPreprocessing_Pipeline.ipynb' **
 
-1. 'Companies'
+On Github:
+1. 'Companies' 
 2. 'Funding'
 3. 'Investors'
 
+On Google Drive:
+1. [People Data from Crunchbase](https://drive.google.com/file/d/1hDpWc7DjrCUaiS1QdBTeA14Yq5JOXwew/view?usp=share_link)
+
+** The following data set / directories are needed to run 'Feature Engineering/FeatureEngineering.ipynb' **
+
+On Github:
 
 
 

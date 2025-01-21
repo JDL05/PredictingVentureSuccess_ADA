@@ -3,7 +3,7 @@
 ✨ **Brief description:** We use Cruchbase and Social Media data to predict the success of startups with classical Machine Learning models, a new foundation model called TabPFN and Large Language Models.
 
 ![Status Badge](https://img.shields.io/badge/status-active-green.svg)  
-![Python](https://img.shields.io/badge/python-3.9-blue)
+![Python](https://img.shields.io/badge/python-3.12-blue)
 ![React](https://img.shields.io/badge/react-17.0.2-blue)
 
 ---

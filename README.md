@@ -28,11 +28,22 @@ The objective of this project is to predict the success of startups in the core 
 
 ## 💬 Languages
 
-
+* Python (executed in Jupyter Notebooks)
+* React (Dashboard)
 
 ---
 
 ## 🔢 Data Files
+
+All data files needed to process the code are stored in the 'Datasets'-Directory. To use them, the entire directories have to be downloaded. In the code, every files are read with the use of a wildcard in the filepaths (/*.csv). 
+
+The following data sets / directories are needed to run the code:
+
+1. 'Companies'
+2. 'Funding'
+3. 'Investors'
+
+
 
 
 ---

@@ -35,7 +35,7 @@ The goal of this project is to predict the success of startups in the core start
 
 ## 🐍 Coding Files
 
-*We applied a typical Machine Learning pipeline with the following order and file names:*
+### We applied a typical Machine Learning pipeline with the following order and file names:
 
 * Pre-Processing: DataPreprocessing_Pipeline.ipynb
 * Feature Engineering: FeatureEngineering.ipynb

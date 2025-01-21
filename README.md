@@ -47,7 +47,7 @@ The goal of this project is to predict the success of startups in the core start
 1. Put a new unbanned set of HTTP Proxies in Code/Social Media Webscraping/Proxies.txt.
 2. For LinkedIn Company Information run Code/Social Media Webscraping/scrapeLinkedInThreaded.py.
 3. For LinkedIn Founder Information run Code/Social Media Webscraping/scrapeLinkedInFoundersThreaded.py.
-4. For Twitter Company Information run Code/Social Media Webscraping/scrapeSocialBladeThreaded.py.
+4. For X / Twitter Company Information run Code/Social Media Webscraping/scrapeSocialBladeThreaded.py.
 5. Results are saved automatically into Code/Social Media Webscraping/Results.
    
 ### For the Dashboarding, the following files have to be run:

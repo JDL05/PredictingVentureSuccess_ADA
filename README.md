@@ -83,7 +83,7 @@ On Github:
 1. Code/Social Media Webscraping/Results/LinkedIn/founders_linkedin.csv
 2. Datasets/Datasets/Universities/UniversityRanking.csv
 
-### The other files do not need additional data files
+### The other files do not need additional data 
 
 ---
 

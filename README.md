@@ -112,8 +112,8 @@ On Github:
 [Research Paper](LINK) <br>
 The results are explained in a research-type paper that describes the related work, methodology, and application of the experiment. This paper provides the most detailed information.
 
-[Dashboard](LINK) <br>
-The dashboard is coded in React and is [online](link) accessible. However, the source code is provided and can be run locally. 
+[Dashboard](https://dashboard-startup-prediction.netlify.app) <br>
+The dashboard is coded in React and is [online](https://dashboard-startup-prediction.netlify.app) accessible. However, the source code is provided and can be run locally. 
 
 ---
 

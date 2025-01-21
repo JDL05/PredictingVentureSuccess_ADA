@@ -42,7 +42,7 @@ The goal of this project is to predict the success of startups in the core start
 * Model Preparation: ModelPreparation.ipynb
 * Modelling: Modelling.ipynb
 
-### For the Webscraping, the following files have to be run:
+### For the Webscraping, the following steps have to be taken:
 
 1. Put a new unbanned set of HTTP Proxies in Code/Social Media Webscraping/Proxies.txt.
 2. For LinkedIn Company Information run Code/Social Media Webscraping/scrapeLinkedInThreaded.py.

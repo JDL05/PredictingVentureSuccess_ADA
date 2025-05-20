@@ -109,7 +109,7 @@ On Github:
 
 ## 📎 Deliverables
 
-[Research Paper](LINK) <br>
+[Research Paper](https://dashboard-startup-prediction.netlify.app/ADA_Final_Project_Report.pdf) <br>
 The results are explained in a research-type paper that describes the related work, methodology, and application of the experiment. This paper provides the most detailed information.
 
 [Dashboard](https://dashboard-startup-prediction.netlify.app) <br>
